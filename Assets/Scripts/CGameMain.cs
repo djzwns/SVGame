@@ -14,10 +14,10 @@ public class CGameMain : MonoBehaviour
 
     public InputField input_field;
     public RectTransform scroll_rect;
-    Vector2 rectPosition;
-
-    public Transform player;
+    Vector2 rectPosition = new Vector2();
+    
     public GameObject speech_bubble;
+    public GameObject speech_attach;
 
     private void Awake()
     {
@@ -39,10 +39,11 @@ public class CGameMain : MonoBehaviour
     private void OnGUI()
     {
         // Received text.
+        GUI.BeginGroup(new Rect(rectPosition, scroll_rect.rect.size));
+
         GUILayout.BeginVertical();
         currentScrollPos = GUILayout.BeginScrollView(currentScrollPos, GUILayout.MaxWidth(scroll_rect.rect.width), GUILayout.MaxHeight(scroll_rect.rect.height));
         
-
         foreach (string text in this.received_texts)
         {
             GUILayout.BeginHorizontal();
@@ -53,6 +54,8 @@ public class CGameMain : MonoBehaviour
 
         GUILayout.EndScrollView();
         GUILayout.EndVertical();
+
+        GUI.EndGroup();
 
         //// Input.
         //GUILayout.BeginHorizontal();
@@ -101,8 +104,10 @@ public class CGameMain : MonoBehaviour
     {
         if(speech != null)
             StopCoroutine(speech);
+
         speech = EnableObject(speech_bubble, 3f);
         StartCoroutine(speech);
+
         Text speechText = speech_bubble.GetComponentInChildren<Text>();
         speechText.text = text;
     }
@@ -110,6 +115,9 @@ public class CGameMain : MonoBehaviour
     private IEnumerator EnableObject(GameObject obj, float delay)
     {
         obj.SetActive(true);
+
+        Vector2 pos = Camera.main.WorldToScreenPoint(speech_attach.transform.position);
+        obj.transform.position = pos;
 
         yield return new WaitForSeconds(delay);
 
