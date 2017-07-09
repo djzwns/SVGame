@@ -29,16 +29,23 @@ public class CPlayer : MonoBehaviour
         v = Input.GetAxis("Vertical");
 
         currentState.Execute(this);
-        
+
+        PlayerMove();
+    }
+
+    private void PlayerMove()
+    {
         // 중력
         if (!characterCtrl.isGrounded)
             movement.Set(movement.x, movement.y + (Physics.gravity * Time.deltaTime).y, movement.z);
 
-
         characterCtrl.Move(movement * Time.deltaTime);
     }
 
-    // 상태 전이
+    /// <summary>
+    /// 플레이어의 상태를 전이 시킴.
+    /// </summary>
+    /// <param name="_state">전이시킬 상태</param>
     public void ChangeState(IPlayerState _state)
     {
         Type currentStateType = this.currentState.GetType();
@@ -54,7 +61,10 @@ public class CPlayer : MonoBehaviour
         Debug.Log(currentState.GetType());
     }
 
-    // 플레이어 이동
+    /// <summary>
+    /// 플레이어를 _speed 의 속도로 이동시킴.
+    /// </summary>
+    /// <param name="_speed">이동 속도</param>
     public void Move(float _speed)
     {
         if (!characterCtrl.isGrounded)
@@ -62,10 +72,17 @@ public class CPlayer : MonoBehaviour
             return;
         }
         
+        // 키입력에 따라 이동 방향 지정
         movement = new Vector3(h, 0, v) * _speed;
 
+        // 이동 방향의 기준이 캐릭터를 기준으로 하기 때문에 카메라 시점만큼 돌려줌
+        movement = Camera.main.transform.rotation * movement;
+
+        // y축은 움직이면 안돼서 0으로 재설정
+        movement.Set(movement.x, 0, movement.z);
+
+        // movement 를 기준으로 캐릭터 회전
         Rotate();
-        //movement = transform.TransformDirection(movement);
     }
 
     private float rotationSpeed = 10f;
