@@ -6,22 +6,16 @@ namespace PlayerState
 {
     public class CIdleState : IPlayerState
     {
-        void IPlayerState.Enter(CPlayer _player)
+        void IPlayerState.Enter(CPlayerController _player)
         {
             // 애니메이션 변경
         }
 
-        void IPlayerState.Execute(CPlayer _player)
+        void IPlayerState.Execute(CPlayerController _player)
         {
             if (_player.isMove)
             {
                 _player.ChangeState(CPlayerState.runningState);
-                return;
-            }
-
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                _player.ChangeState(CPlayerState.fastRunningState);
                 return;
             }
 
@@ -34,7 +28,7 @@ namespace PlayerState
             _player.Move(0);
         }
 
-        void IPlayerState.Exit(CPlayer _player)
+        void IPlayerState.Exit(CPlayerController _player)
         {
         }
     }

@@ -17,7 +17,7 @@ public class CCameraMove : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         Vector3 angles = this.transform.eulerAngles;
         cam_y = angles.y;
         cam_x = angles.x;

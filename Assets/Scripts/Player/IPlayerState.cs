@@ -6,8 +6,8 @@ namespace PlayerState
 {
     public interface IPlayerState
     {
-        void Enter(CPlayer _player);
-        void Execute(CPlayer _player);
-        void Exit(CPlayer _player);
+        void Enter(CPlayerController _player);
+        void Execute(CPlayerController _player);
+        void Exit(CPlayerController _player);
     }
 }

@@ -19,6 +19,8 @@ public class CGameMain : MonoBehaviour
     public GameObject speech_bubble;
     public GameObject speech_attach;
 
+    public GameObject chat_box;
+
     private void Awake()
     {
         //this.input_text = "";
@@ -28,6 +30,7 @@ public class CGameMain : MonoBehaviour
         rectPosition = scroll_rect.position;
 
         speech_bubble.SetActive(false);
+        this.chat_box.SetActive(false);
     }
 
     public void on_receive_chat_msg(string text)
@@ -83,7 +86,13 @@ public class CGameMain : MonoBehaviour
             {
                 this.input_field.ActivateInputField();
                 this.input_field.Select();
+                this.chat_box.SetActive(true);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {            
+            this.chat_box.SetActive(false);
         }
     }
 

@@ -7,14 +7,13 @@ namespace PlayerState
     public class CFastRunningState : IPlayerState
     {
         private float speed = 15f;
-        private float jumpSpeed = 10f;
 
-        void IPlayerState.Enter(CPlayer _player)
+        void IPlayerState.Enter(CPlayerController _player)
         {
             // 애니메이션 변경
         }
 
-        void IPlayerState.Execute(CPlayer _player)
+        void IPlayerState.Execute(CPlayerController _player)
         {
             if (!_player.isMove)
             {
@@ -30,14 +29,14 @@ namespace PlayerState
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _player.Jump(jumpSpeed);
+                _player.Jumping();
                 return;
             }
 
             _player.Move(speed);
         }
 
-        void IPlayerState.Exit(CPlayer _player)
+        void IPlayerState.Exit(CPlayerController _player)
         {
         }
     }
