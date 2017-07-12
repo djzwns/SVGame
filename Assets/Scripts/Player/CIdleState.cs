@@ -19,11 +19,18 @@ namespace PlayerState
                 return;
             }
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetButtonDown("ButtonA"))
             {
                 Debug.Log("앉기");
                 return;
             }
+
+            if (Input.GetButtonDown("ButtonX")) Debug.Log("button x");
+            if (Input.GetButtonDown("ButtonY")) Debug.Log("button y");
+            if (Input.GetButtonDown("ButtonB")) Debug.Log("button b");
+            if (Input.GetButtonDown("BackButton")) Debug.Log("button back");
+            if (Input.GetButtonDown("StartButton")) Debug.Log("button start");
+
 
             _player.Move(0);
         }

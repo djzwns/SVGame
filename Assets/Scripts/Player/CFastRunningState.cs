@@ -21,13 +21,13 @@ namespace PlayerState
                 return;
             }
 
-            if (Input.GetKeyUp(KeyCode.LeftShift))
+            if (Input.GetButtonUp("Run") || Input.GetAxis("Run") < 0.5)
             {
                 _player.ChangeState(CPlayerState.runningState);
                 return;
             }
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetButtonDown("ButtonA"))
             {
                 _player.Jumping();
                 return;

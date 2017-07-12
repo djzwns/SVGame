@@ -52,8 +52,8 @@ public class CCameraMove : MonoBehaviour
     /// </summary>
     void Rotate()
     {
-        float mouse_x = Input.GetAxis("Mouse X");
-        float mouse_y = Input.GetAxis("Mouse ScrollWheel");
+        float mouse_x = Input.GetAxis("Camera X");
+        float mouse_y = Input.GetAxis("Camera Y");
 
         cam_x += mouse_x * rotate_x_speed;
         cam_y -= mouse_y * rotate_y_speed;

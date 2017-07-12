@@ -21,13 +21,13 @@ namespace PlayerState
                 return;
             }
 
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetButton("Run") || Input.GetAxis("Run") > 0.5)
             {
                 _player.ChangeState(CPlayerState.fastRunningState);
                 return;
             }
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetButtonDown("ButtonA"))
             {
                 _player.Rolling();
                 return;

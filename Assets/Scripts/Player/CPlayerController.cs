@@ -191,8 +191,9 @@ public class CPlayerController : MonoBehaviour
 
 
         // 애니메이션
-        float velocity = rb.velocity.sqrMagnitude;
-        animator.SetFloat("Velocity", velocity / _speed);
+        float velocity = movement.normalized.magnitude;
+        velocity = Mathf.Clamp(velocity, 0, 1);
+        animator.SetFloat("Velocity", velocity);
         animator.SetBool("Moving", !movement.Equals(Vector3.zero));
     }
 
